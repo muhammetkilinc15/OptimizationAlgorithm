@@ -1,6 +1,14 @@
 import java.util.Random;
 
 public class Main {
+
+    // Bu Task'ta Random bir n array oluşturulacak ve bu array üzerinde iterasyonlar yapılacak.
+    // Her iterasyonda bir rastgele index seçilip bu index'teki değer rastgele bir değerle değiştirilecek.
+    // Eğer yeni değer eski değerden daha iyi bir sonuç veriyorsa yeni değer kabul edilecek.
+    // Fitness fonksiyonu olarak her bir elemanın karesinin toplamı kullanılacak.
+    // [-100, 100] aralığında rastgele değerler alınacak.
+    // 1000 iterasyon yapılacak ve sonuç yazdırılacak.
+    // Sonuçta en iyi sonucu veren array yazdırılacak.
     public static void main(String[] args) {
 
         int[] currentSol = new int[10]; // Random n array

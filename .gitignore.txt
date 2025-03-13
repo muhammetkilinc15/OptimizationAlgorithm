@@ -1,62 +1,49 @@
-*.pyc
-.DS_Store
+# Java compiled files
+*.class
+
+# IntelliJ IDEA project files
+.idea/
+*.iml
+*.iws
+
+# Java build output directories
+bin/
+build/
+target/
+
+# Maven
+log/
+target/
+
+# Gradle files
 .gradle
-.idea/gradle_extensions.xml
-.idea/libraries/Gradle__*.xml
-.idea/mavenHomeManager.xml
-.idea/shelf
-.idea/workspace.xml
-.jqwik-database
-/.diff
-/config
-/out
-/system
-/test-config
-/test-system
-/univocity-parsers
 build/dependencies/.gradle
 build/dependencies/build
-edu/dependencies/.gradle
-edu/dependencies/build
-native/**/build/
-stale_outputs_checked
-/android
-
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
-*.jar
-*.war
-*.ear
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+.gradle/
 
 # Eclipse
 .classpath
 .project
 .settings/
 
-# Intellij
-.idea/
-*.iml
-*.iws
-
-# Mac
+# macOS system files
 .DS_Store
 
-# Maven
-log/
-target/
+# Virtual machine crash logs
+hs_err_pid*
 
-# Inclusions
-!lib/**
+# Package files
+*.jar
+*.war
+*.ear
 
-# Compiled Files
-*.class
-bin/
-build/
-/bin1/
-java/build/**
+# Exclude generated output (build or other temp files)
+out/
+
+# Exclude J2ME tools and logs
+.mtj.tmp/
+
+# Exclude temporary files and logs
+*.log
+*.tmp
+*.swp
