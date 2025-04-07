@@ -1,0 +1,48 @@
+import java.util.Random;
+
+public class Main {
+    public static void main(String[] args) {
+        Random random = new Random();
+        double[] solution = generateInitialSolution(10, random);
+        final double TEMPERATURE = 100;
+        final double COOLING = 0.99;
+        final int ITERATIONS = 1000;
+        int iteration = 0;
+        double currentFitness = rosenbrock(solution[0], solution[1]);
+        while (iteration < ITERATIONS) {
+            double[] newSolution = Movement(solution, random);
+            double newFitness = rosenbrock(newSolution[0], newSolution[1]);
+
+        }
+    }
+
+    static double[] Movement(double[] solution, Random random) {
+        double[] newSolution = solution.clone();
+        int index1 = random.nextInt(solution.length);
+        int value = random.nextInt(-5, 5);
+        newSolution[index1] += value;
+        // Çözüm değerini belirli sınırlar içinde tut
+        if (newSolution[index1] > 30) {
+            newSolution[index1] = 30;
+        }
+        if (newSolution[index1] < -30) {
+            newSolution[index1] = -30;
+        }
+        return newSolution;
+    }
+
+
+    static double[] generateInitialSolution(int N, Random random) {
+        double[] initialSolution = new double[N];
+        // Her elemanı [-30, 30] aralığında rastgele bir değerle baseman
+        for (int i = 0; i < N; i++) {
+            initialSolution[i] = random.nextInt(-30, 31);  // -30 ile 30 arasında rastgele değerler
+        }
+        return initialSolution;
+    }
+
+    static double rosenbrock(double x, double y) {
+        return Math.pow(1 - x, 2) + 100 * Math.pow(y - x * x, 2);
+    }
+}
+
