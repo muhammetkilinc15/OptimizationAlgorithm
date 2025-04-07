@@ -1,8 +1,48 @@
 import java.util.Arrays;
 import java.util.Random;
 
-public class Task3 {
+/**
+ * Task3 - Simulated Annealing ile Gezgin Satıcı Problemi (TSP) Çözümü
+ *
+ * 📌 Amaç:
+ * Bu program, 14 farklı şehir arasında minimum toplam mesafeyi bulan rotayı (gezgin satıcı problemi)
+ * Simulated Annealing (SA) algoritması ile çözmeyi hedeflemektedir.
+ *
+ * 🌍 Problem:
+ * Bir satıcı, her bir şehri yalnızca bir kez ziyaret ederek başladığı şehre geri dönmelidir.
+ * Amaç, toplam yol uzunluğunu minimize eden en iyi rotayı bulmaktır.
+ *
+ * 🧠 Kullanılan Yöntem: Simulated Annealing (SA)
+ * - Doğaya dayalı, olasılıksal bir optimizasyon algoritmasıdır.
+ * - Yerel minimumlara takılmadan daha iyi çözümler bulmayı amaçlar.
+ * - Sıcaklık (temperature) ve soğuma oranı (cooling rate) temel kontrol parametreleridir.
+ *
+ * 🔧 İçerik:
+ * - Şehir koordinatları (latitude, longitude) sabit olarak tanımlıdır.
+ * - Rastgele bir başlangıç çözümü (rota) üretilir.
+ * - Komşu çözüm üretmek için iki şehir yer değiştirir.
+ * - Öklid mesafesi ile rota maliyeti hesaplanır.
+ * - Belirli bir sıcaklık ve iterasyon boyunca daha iyi çözümler aranır.
+ *
+ * 🧾 Çıktı:
+ * - Her iterasyonda mevcut çözümün (rotanın) maliyeti (fitness) yazdırılır.
+ * - En iyi rota ve bu rotanın toplam uzunluğu (fitness değeri) program sonunda ekrana basılır.
+ *
+ * 👨‍💻 Kullanım:
+ * main() fonksiyonu içerisinde:
+ *    - Başlangıç sıcaklığı = 1000
+ *    - Soğuma oranı = 0.995
+ *    - Maksimum iterasyon = 100000
+ * ile algoritma çalıştırılır.
+ *
+ * 🧠 Simulated Annealing Ne Zaman Kabul Eder?
+ *    - Yeni çözüm daha iyi → her zaman kabul
+ *    - Daha kötü çözüm → küçük bir olasılıkla kabul (yerel minimumdan kaçmak için)
+ *
+ */
 
+
+public class Task3 {
     // Toplam şehir sayısı (N = 14)
     private static final int N = 14;
 
