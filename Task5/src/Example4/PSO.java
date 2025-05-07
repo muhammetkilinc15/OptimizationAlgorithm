@@ -1,0 +1,103 @@
+package Example4;
+
+import java.util.Random;
+
+public class PSO {
+
+    static final int PARTICLE_COUNT = 30;
+    static final int MAX_ITEM = 100;
+    static final int DIMENSION = 3; // Pozisyon vektörlerinin boyutu (örneğin 3)
+    static final double W = 0.5;
+    static final double C1 = 1.5;
+    static final double C2 = 1.5;
+
+    static class Particle {
+        double[] position = new double[DIMENSION];
+        double[] velocity = new double[DIMENSION];
+        double[] personalBestPosition = new double[DIMENSION];
+        double personalBestValue;
+
+        public Particle(Random rand) {
+            for (int i = 0; i < DIMENSION; i++) {
+                position[i] = rand.nextDouble() * 20 - 10; // [-10, 10] arası
+                velocity[i] = rand.nextDouble() * 2 - 1;   // [-1, 1] arası
+                personalBestPosition[i] = position[i];
+            }
+            personalBestValue = fitness(position);
+        }
+    }
+
+    // Fitness fonksiyonu: √(x₁² + x₂² + ... + xₙ²)
+    static double fitness(double[] pos) {
+        double sum = 0;
+        for (double x : pos) {
+            sum += x * x;
+        }
+        return Math.sqrt(sum);
+    }
+
+    public static void main(String[] args) {
+        Random rand = new Random();
+        Particle[] swarm = new Particle[PARTICLE_COUNT];
+
+        double[] globalBestPosition = new double[DIMENSION];
+        double globalBestValue = Double.MAX_VALUE;
+
+        // Initialize population
+        for (int i = 0; i < PARTICLE_COUNT; i++) {
+            swarm[i] = new Particle(rand);
+            if (swarm[i].personalBestValue < globalBestValue) {
+                globalBestValue = swarm[i].personalBestValue;
+                globalBestPosition = swarm[i].personalBestPosition.clone();
+            }
+        }
+
+        // Iteration loop
+        for (int iter = 0; iter < MAX_ITEM; iter++) {
+            for (Particle p : swarm) {
+                for (int d = 0; d < DIMENSION; d++) {
+                    double r1 = rand.nextDouble();
+                    double r2 = rand.nextDouble();
+
+                    // Velocity update
+                    p.velocity[d] = W * p.velocity[d]
+                            + C1 * r1 * (p.personalBestPosition[d] - p.position[d])
+                            + C2 * r2 * (globalBestPosition[d] - p.position[d]);
+
+                    // Position update
+                    p.position[d] += p.velocity[d];
+                }
+
+                // Fitness evaluation
+                double currentFitness = fitness(p.position);
+
+                if (currentFitness < p.personalBestValue) {
+                    p.personalBestValue = currentFitness;
+                    p.personalBestPosition = p.position.clone();
+                }
+
+                if (currentFitness < globalBestValue) {
+                    globalBestValue = currentFitness;
+                    globalBestPosition = p.position.clone();
+                }
+            }
+
+            System.out.printf("Iteration %d: Best Value = %.6f at Position = %s\n",
+                    iter, globalBestValue, arrayToString(globalBestPosition));
+        }
+
+        System.out.println("Final Result:");
+        System.out.printf("Best Position: %s\nBest Value: %.6f\n",
+                arrayToString(globalBestPosition), globalBestValue);
+    }
+
+    static String arrayToString(double[] arr) {
+        StringBuilder sb = new StringBuilder("[");
+        for (int i = 0; i < arr.length; i++) {
+            sb.append(String.format("%.4f", arr[i]));
+            if (i != arr.length - 1) sb.append(", ");
+        }
+        sb.append("]");
+        return sb.toString();
+    }
+}
