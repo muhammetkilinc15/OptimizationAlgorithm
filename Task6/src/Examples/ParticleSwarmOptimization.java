@@ -1,3 +1,5 @@
+package Examples;
+
 import java.util.Random;
 
 /*
@@ -70,12 +72,18 @@ public class ParticleSwarmOptimization {
                 double personalBestFitness = Rosenberg.evaluate(personalBests[i]);
                 // TODO   update personal best
                 if (currentFitness < personalBestFitness) {
-                    System.arraycopy(positions[i], 0, personalBests[i], 0, dimension);
+                    //System.arraycopy(positions[i], 0, personalBests[i], 0, dimension);
+                    for (int j = 0; j < dimension; j++) {
+                        personalBests[i][j] = positions[i][j];
+                    }
                 }
 
                 // TODO   update global best
                 if (currentFitness < globalBestFitness) {
-                    System.arraycopy(positions[i], 0, globalBestPosition, 0, dimension);
+                    //System.arraycopy(positions[i], 0, globalBestPosition, 0, dimension);
+                    for (int j = 0; j < dimension; j++) {
+                        globalBestPosition[j] = positions[i][j];
+                    }
                     globalBestFitness = currentFitness;
                 }
             }

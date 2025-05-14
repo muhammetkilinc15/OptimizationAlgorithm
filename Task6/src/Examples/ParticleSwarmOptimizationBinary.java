@@ -1,6 +1,8 @@
+package Examples;
+
 class RosenbergBinary {
     public static int count = 0;
-    // Rosenberg fonksiyonu
+    // Examples.Rosenberg fonksiyonu
     public double evaluate(int[] x) {
         count++;
         double sum = 0.0;
