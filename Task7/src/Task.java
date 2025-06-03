@@ -7,7 +7,7 @@ public class Task {
         int MaxWeight = 30;
 
         int maxIt = 1000;
-        int dim =6;
+        int dim =10;
         int np = 10;
         float c1 = 2, c2 = 2;
 
@@ -15,9 +15,9 @@ public class Task {
         double wMin = 0.4;
 
         Item[] items = generateItems(dim);
+
         int[][] p = new int[np][];
         int[][] pBest = new int[np][];
-
         int[] gbest = new int[dim];
         int gFit = Integer.MIN_VALUE;
 
@@ -29,7 +29,7 @@ public class Task {
             pBest[i] = new int[dim];
 
             for (int j = 0; j < dim; j++) {
-                p[i][j] = random.nextBoolean() ? 1 : 0;
+                p[i][j] = random.nextInt(2);
                 pBest[i][j] = p[i][j];
                 v[i][j] = 0;
             }
@@ -70,7 +70,7 @@ public class Task {
 
         System.out.println("Tüm ürünler:");
         for (int i = 0; i < dim; i++) {
-            System.out.println("Ürün " + i + " -> Ağırlık: " + items[i].weight + ", Değer: " + items[i].value);
+            System.out.println("Ürün " + (i+1) + " -> Ağırlık: " + items[i].weight + ", Değer: " + items[i].value);
         }
 
 
@@ -84,7 +84,7 @@ public class Task {
         System.out.println("\n\nSeçilen Ürünler:");
         for (int i = 0; i < dim; i++) {
             if (gbest[i] == 1) {
-                System.out.println("Ürün " + i + " -> Ağırlık: " + items[i].weight + ", Değer: " + items[i].value);
+                System.out.println("Ürün " + (i+1) + " -> Ağırlık: " + items[i].weight + ", Değer: " + items[i].value);
                 totalWeight += items[i].weight;
             }
         }
@@ -126,8 +126,8 @@ public class Task {
         Item[] items = new Item[n];
         Random random = new Random();
         for (int i = 0; i < n; i++) {
-            int weight = random.nextInt(10) + 1;
-            int value = random.nextInt(10) + 1;
+            int weight = random.nextInt(1,11);
+            int value = random.nextInt(1,11);
             items[i] = new Item(weight, value);
         }
         return items;
